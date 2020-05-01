@@ -41,7 +41,6 @@
       <source-file src="src/android/AppIndexing.java" target-dir="src/com/learnyst/appindexing" />
 
     </platform>
-    <hook src="scripts/after_prepare.js" type="after_prepare" />
 
 
 </plugin>

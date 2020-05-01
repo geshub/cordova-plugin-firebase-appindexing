@@ -28,12 +28,6 @@
               <param name="android-package" value="com.learnyst.appindexing.AppIndexing"/>
           </feature>
       </config-file>
-      <config-file parent="/resources" target="res/values/strings.xml">
-        <string name="google_app_id">@string/google_app_id</string>
-      </config-file>
-      <config-file parent="/resources" target="res/values/strings.xml">
-        <string name="google_api_key">@string/google_api_key</string>
-      </config-file>
 
       <framework src="com.google.firebase:firebase-core:10.0.1" />
       <framework src="com.google.firebase:firebase-appindexing:10.0.1" />

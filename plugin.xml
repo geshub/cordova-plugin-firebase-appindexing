@@ -29,8 +29,7 @@
           </feature>
       </config-file>
 
-      <framework src="com.google.firebase:firebase-core:10.0.1" />
-      <framework src="com.google.firebase:firebase-appindexing:10.0.1" />
+      <framework src="com.google.firebase:firebase-appindexing:19.1.0" />
 
       <source-file src="src/android/AppIndexing.java" target-dir="src/com/learnyst/appindexing" />
 

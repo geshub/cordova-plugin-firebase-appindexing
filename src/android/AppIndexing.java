@@ -74,26 +74,34 @@ public class AppIndexing extends CordovaPlugin {
   private void startView(String title, String webPath)
   {
     try {
-      final String APP_URI = BASE_URL.buildUpon().appendPath(webPath).build().toString();
+      final String APP_URI = BASE_URL.buildUpon().appendEncodedPath(webPath).build().toString();
       final String TITLE = title;
-      Log.d(TAG, "App Indexing API: startView Exception "+APP_URI+title+webPath);
+
+      Log.d(TAG, "App Indexing API: startView " + APP_URI + " title: " + title + " webpath: " + webPath );
+
       Indexable indexPage = new Indexable.Builder().setName(TITLE).setUrl(APP_URI).build();
       FirebaseAppIndex.getInstance().update(indexPage);
-      FirebaseUserActions.getInstance().start(Actions.newView(TITLE, APP_URI));
+
+      Action action = Actions.newView(TITLE, APP_URI);
+      // log the view action
+      FirebaseUserActions.getInstance().start(action);
+
     } catch(Exception e){
-      Log.d(TAG, "App Indexing API: startView Exception ");
+      Log.d(TAG, "App Indexing API: startView Exception " + e);
     }
   }
 
   private void endView(String title, String webPath)
   {
     try{
-      final String APP_URI = BASE_URL.buildUpon().appendPath(webPath).build().toString();
+      final String APP_URI = BASE_URL.buildUpon().appendEncodedPath(webPath).build().toString();
       final String TITLE = title;
-      Log.d(TAG, "App Indexing API: endView Exception "+APP_URI+title+webPath);
-      FirebaseUserActions.getInstance().end(Actions.newView(TITLE, APP_URI));
+      Log.d(TAG, "App Indexing API: endView " + APP_URI + " title: " + title + " webpath: " + webPath );
+
+      Action action = Actions.newView(TITLE, APP_URI);
+      FirebaseUserActions.getInstance().end(action);
     } catch(Exception e){
-      Log.d(TAG, "App Indexing API: endView Exception ");
+      Log.d(TAG, "App Indexing API: endView Exception " + e);
     }
   }
 }

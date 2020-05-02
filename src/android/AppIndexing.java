@@ -39,18 +39,27 @@ public class AppIndexing extends CordovaPlugin {
   {
     try {
       if (INITIALIZE_INDEXING.equals(action)) {
+
         this.initializeIndexing(args.getString(0));
         callbackContext.success();
         return true;
+
       } else if (VIEW_STARTED.equals(action)) {
-        if(BASE_URL != null){
-          this.startView(args.getString(0), args.getString(1));
-          callbackContext.success();
-        } else {
-          callbackContext.error("Please initialize base URI");
-          return false;
-        }
-        return true;
+
+              cordova.getThreadPool().execute(new Runnable() {
+                  public void run() {
+                      if(BASE_URL != null){
+                                this.startView(args.getString(0), args.getString(1));
+                                callbackContext.success();
+
+                       } else {
+                                callbackContext.error("Please initialize base URI");
+                                return false;
+                      }
+                  }
+              });
+              return true;
+
       } else if (VIEW_ENDED.equals(action)) {
         if(BASE_URL != null){
           this.endView(args.getString(0), args.getString(1));
@@ -64,6 +73,7 @@ public class AppIndexing extends CordovaPlugin {
     } catch (Exception e){
       Log.i("AppIndexing Exception","AppIndexing ExceptionExceptionExceptionExceptionExceptionException");
     }
+
     return false;  // Returning false results in a "MethodNotFound" error.
   }
 

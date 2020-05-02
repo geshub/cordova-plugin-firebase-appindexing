@@ -46,18 +46,14 @@ public class AppIndexing extends CordovaPlugin {
 
       } else if (VIEW_STARTED.equals(action)) {
 
-      cordova.getThreadPool().execute(new Runnable() {
-                  public void run() {
-                                        if(BASE_URL != null){
-                                                  this.startView(args.getString(0), args.getString(1));
-                                                  callbackContext.success();
-
-                                         } else {
-                                                  callbackContext.error("Please initialize base URI");
-                                        }
-                  }
-              });
-              return true;
+        if(BASE_URL != null){
+          this.startView(args.getString(0), args.getString(1));
+          callbackContext.success();
+        } else {
+          callbackContext.error("Please initialize base URI");
+          return false;
+        }
+        return true;
 
       } else if (VIEW_ENDED.equals(action)) {
         if(BASE_URL != null){

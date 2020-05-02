@@ -54,7 +54,6 @@ public class AppIndexing extends CordovaPlugin {
 
                                          } else {
                                                   callbackContext.error("Please initialize base URI");
-                                                  return false;
                                         }
                   }
               });
